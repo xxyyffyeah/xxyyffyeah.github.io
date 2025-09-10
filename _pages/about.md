@@ -18,10 +18,6 @@ announcements:
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
 
-latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
 ---
 
 Hi! It's Yifan. I'm currently a graduate student working towards my Master of Science (M.S.) degree in Information Management at University of Illinois at Urbana-Champaign. My research interests include `LLM agents, prompt optimization and 3D reconstrcution`.
