@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2024-8-22 15:59:00-0400
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+Glad to join School of Information Science and start my journey of M.S. Information Management.
