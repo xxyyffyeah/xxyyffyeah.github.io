@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Glad to join School of Information Science and start my journey of M.S. Information Management.
+Glad to join School of Information Science and start my journey of M.S. Information Management at University of Illinois at Urbana-Champaign.

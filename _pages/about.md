@@ -6,7 +6,7 @@ subtitle:
 
 profile:
   align: right
-  image: selfie.heic
+  image: selfie.png
   image_circular: false # crops the image to make it circular
   more_info:
 
@@ -20,7 +20,7 @@ announcements:
 
 ---
 
-Hi! It's Yifan. I'm currently a graduate student working towards my Master of Science (M.S.) degree in Information Management at University of Illinois at Urbana-Champaign. My research interests include `LLM agents, prompt optimization and 3D reconstrcution`.
+Hi! It's Yifan. I'm currently a graduate student working towards my Master of Science (M.S.) degree in Information Management at University of Illinois at Urbana-Champaign. My research interests include `Vision Language Model, LLM agents, Prompt optimization and 3D Reconstrcution`.
 
 I am currently engaged in research on `Large Language Model Agents` under the guidance of [Prof. Haohan Wang](https://haohanwang.github.io/) in the DREAM Lab at the University of Illinois Urbana-Champaign. My research journey began during my undergraduate studies at ShanghaiTech University, where I earned a B.Eng. in Computer Science. There, I had the opportunity to work on `Microscopic 3D Reconstruction` in the AMNR Lab with [Prof. Song Liu](https://sist.shanghaitech.edu.cn/liusong_en/main.htm).
 
