@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://xxyyffyeah.github.io/sitemap.xml
+Sitemap: https://yfxu.org/sitemap.xml

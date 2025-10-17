@@ -42,11 +42,14 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather.html";
-            },},{id: "news-glad-to-join-school-of-information-science-and-start-my-journey-of-m-s-information-management",
+            },},{id: "news-glad-to-join-school-of-information-science-and-start-my-journey-of-m-s-information-management-at-university-of-illinois-at-urbana-champaign",
           title: 'Glad to join School of Information Science and start my journey of M.S....',
           description: "",
           section: "News",},{id: "news-joined-multi-agent-research-group-under-supervision-of-prof-haohan-wang",
           title: 'Joined multi-agent research group under supervision of Prof. Haohan Wang.',
+          description: "",
+          section: "News",},{id: "news-joined-rehg-lab-under-supervision-of-prof-james-m-rehg",
+          title: 'Joined Rehg Lab under supervision of Prof. James M. Rehg.',
           description: "",
           section: "News",},{
         id: 'social-email',
