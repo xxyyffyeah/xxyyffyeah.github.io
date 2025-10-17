@@ -6,7 +6,7 @@ subtitle:
 
 profile:
   align: right
-  image: fishing.png
+  image: selfie.heic
   image_circular: false # crops the image to make it circular
   more_info:
 
