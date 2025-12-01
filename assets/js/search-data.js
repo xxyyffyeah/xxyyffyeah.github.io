@@ -37,6 +37,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
+        },{id: "nav-poker-strategy",
+          title: "Poker Strategy",
+          description: "Interactive preflop RFI and defense ranges by position",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/poker-rfi/";
+          },
         },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
