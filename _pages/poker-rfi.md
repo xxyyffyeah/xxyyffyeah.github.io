@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /poker-rfi/
-title: Poker Strategy
+title: poker
 description: Interactive preflop RFI and defense ranges by position
 nav: true
 nav_order: 7
@@ -428,7 +428,7 @@ nav_order: 7
       <label class="control-label">Your Position:</label>
       <div class="hero-nav">
         <button class="nav-btn prev" id="hero-prev" aria-label="Previous position">◀</button>
-        <div class="position-display" id="hero-position">UTG</div>
+        <div class="position-display" id="hero-position">BB</div>
         <button class="nav-btn next" id="hero-next" aria-label="Next position">▶</button>
       </div>
       <div class="swipe-hint">💡 Swipe left/right to navigate</div>
@@ -468,8 +468,8 @@ const hands = [
   ['A2o', 'K2o', 'Q2o', 'J2o', 'T2o', '92o', '82o', '72o', '62o', '52o', '42o', '32o', '22']
 ];
 
-// Position arrays
-const allPositions = ['UTG', 'UTG+1', 'UTG+2', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
+// Position arrays (clockwise order around the table, starting from BB)
+const allPositions = ['BB', 'UTG', 'UTG+1', 'UTG+2', 'LJ', 'HJ', 'CO', 'BTN', 'SB'];
 
 // State
 let heroIndex = 0;
@@ -480,37 +480,37 @@ const rfiRanges = {
   'UTG': {
     name: 'UTG - Raise First In',
     stats: 'Raise: 10.1% | Fold: 89.9%',
-    raise: ['AA','KK','QQ','JJ','TT','99','AKs','AQs','AJs','ATs','A5s','A4s','AKo','KQs','KJs','QJs','JTs','T9s','98s','87s','76s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A5s','AKo','KQs','KJs','KTs','QJs','QTs','JTs','T9s','98s']
   },
   'UTG+1': {
     name: 'UTG+1 - Raise First In',
     stats: 'Raise: 14.3% | Fold: 85.7%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','AKs','AQs','AJs','ATs','A9s','A5s','A4s','A3s','AKo','AQo','KQs','KJs','KTs','QJs','JTs','T9s','98s','87s','76s','65s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','AKo','AQo','AJo','KQo']
   },
   'UTG+2': {
     name: 'UTG+2 - Raise First In',
     stats: 'Raise: 15.7% | Fold: 84.3%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','AKs','AQs','AJs','ATs','A9s','A8s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','KQs','KJs','KTs','K9s','QJs','QTs','JTs','T9s','98s','87s','76s','65s','54s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','AKo','AQo','AJo','KQo']
   },
   'LJ': {
     name: 'Lojack - Raise First In',
     stats: 'Raise: 18.3% | Fold: 81.7%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','T8s','98s','87s','76s','65s','54s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','65s','AKo','AQo','AJo','ATo','KQo','KJo']
   },
   'HJ': {
     name: 'Hijack - Raise First In',
     stats: 'Raise: 21.3% | Fold: 78.7%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','A9o','KQs','KJs','KTs','K9s','K8s','KQo','QJs','QTs','Q9s','JTs','J9s','T9s','T8s','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','QJs','QTs','Q9s','JTs','J9s','T9s','T8s','98s','97s','87s','76s','65s','54s','AKo','AQo','AJo','ATo','KQo','KJo','QJo']
   },
   'CO': {
     name: 'Cutoff - Raise First In',
     stats: 'Raise: 27.0% | Fold: 73.0%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','KQo','KJo','QJs','QTs','Q9s','Q8s','QJo','JTs','J9s','J8s','T9s','T8s','T7s','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','K7s','QJs','QTs','Q9s','Q8s','JTs','J9s','J8s','T9s','T8s','98s','97s','87s','86s','76s','75s','65s','64s','54s','43s','AKo','AQo','AJo','ATo','A9o','KQo','KJo','KTo','QJo','QTo','JTo']
   },
   'BTN': {
     name: 'Button - Raise First In',
     stats: 'Raise: 51.1% | Fold: 48.9%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','KQo','KJo','KTo','K9o','K8o','K7o','K6o','K5o','QJs','QTs','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','Q2s','QJo','QTo','Q9o','Q8o','JTs','J9s','J8s','J7s','J6s','J5s','J4s','JTo','J9o','J8o','T9s','T8s','T7s','T6s','T5s','T9o','T8o','98s','97s','96s','95s','98o','87s','86s','85s','84s','87o','76s','75s','74s','76o','65s','64s','63s','65o','54s','53s','52s','54o','43s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','QJs','QTs','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','Q2s','JTs','J9s','J8s','J7s','J6s','T9s','T8s','T7s','T6s','98s','97s','96s','87s','86s','76s','65s','54s','43s','32s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KQo','KJo','KTo','K9o','K8o','K7o','QJo','QTo','Q9o','JTo','J9o','T9o']
   },
   'SB': {
     name: 'Small Blind - RFI Strategy',
@@ -528,46 +528,78 @@ const rfiRanges = {
 
 // Facing RFI Ranges - Complete data from PDF
 const facingRFI = {
-  // Big Blind scenarios (Page 8)
+  //BB
+// 对应图表: BB vs UTG/UTG+1
   'BB_vs_UTG': {
-    threebet_value: ['AA','AKs','AKo','KK','QQ'],
-    threebet_bluff: ['A5s','A4s'],
-    call: ['JJ','TT','99','88','77','AQs','AJs','ATs','AQo','AJo','KQs','KJs','KTs','KQo','QJs','QTs','JTs','T9s','98s','87s','76s']
+    threebet_value: ['AA', 'KK', 'QQ', 'AKs', 'AQs'],
+    threebet_bluff: ['86s', '76s', '75s', '65s', '64s', '54s', '43s'],
+    call: [
+      'JJ', 'TT', '99', '88', '77', '66', '55', '44', '33', '22',
+      'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s',
+      'KQs', 'KJs', 'KTs', 'K9s', 'K8s', 'K7s', 'K6s', 'K5s',
+      'QJs', 'QTs', 'Q9s', 'Q8s', 'Q7s',
+      'JTs', 'J9s', 'J8s', 'J7s',
+      'T9s', 'T8s', 'T7s',
+      '98s', '97s',
+      '87s',
+      'AKo', 'AQo', 'AJo', 'ATo',
+      'KQo', 'KJo',
+      'QJo'
+    ]
   },
+  // 对应图表: BB vs UTG/UTG+1 (相同数据)
   'BB_vs_UTG+1': {
-    threebet_value: ['AA','AKs','AKo','KK','QQ'],
-    threebet_bluff: ['A5s','A4s'],
-    call: ['JJ','TT','99','88','77','AQs','AJs','ATs','AQo','AJo','KQs','KJs','KTs','KQo','QJs','QTs','JTs','T9s','98s','87s','76s']
+    threebet_value: ['AA', 'KK', 'QQ', 'AKs', 'AQs'],
+    threebet_bluff: ['86s', '76s', '75s', '65s', '64s', '54s', '43s'],
+    call: [
+      'JJ', 'TT', '99', '88', '77', '66', '55', '44', '33', '22',
+      'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s',
+      'KQs', 'KJs', 'KTs', 'K9s', 'K8s', 'K7s', 'K6s', 'K5s',
+      'QJs', 'QTs', 'Q9s', 'Q8s', 'Q7s',
+      'JTs', 'J9s', 'J8s', 'J7s',
+      'T9s', 'T8s', 'T7s',
+      '98s', '97s',
+      '87s',
+      'AKo', 'AQo', 'AJo', 'ATo',
+      'KQo', 'KJo',
+      'QJo'
+    ]
   },
+  // 对应图表: BB vs UTG+2
   'BB_vs_UTG+2': {
-    threebet_value: ['AA','AKs','AQs','AKo','KK','QQ','JJ'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s'],
-    call: ['TT','99','88','77','66','AJs','ATs','A9s','AQo','AJo','ATo','KQs','KJs','KTs','K9s','KQo','KJo','QJs','QTs','Q9s','QJo','JTs','J9s','T9s','T8s','98s','87s','76s','65s']
+    threebet_value: ['AA','KK','AKs','AKo'],
+    threebet_bluff: ['A5s','A4s','A3s'],
+    call: ['QQ','JJ','TT','99','88','77','66','55','44','33','22','AQs','AJs','ATs','A9s','A8s','A7s','A6s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','65s','54s','AQo','AJo','ATo','KQo','KJo','QJo']
   },
+  // 对应图表: BB vs LJ
   'BB_vs_LJ': {
-    threebet_value: ['AA','AKs','AQs','AKo','AQo','KK','QQ','JJ'],
+    threebet_value: ['AA','KK','QQ','AKs','AKo'],
     threebet_bluff: ['A5s','A4s','A3s','A2s'],
-    call: ['TT','99','88','77','66','55','AJs','ATs','A9s','A8s','AJo','ATo','A9o','KQs','KJs','KTs','K9s','KQo','KJo','KTo','QJs','QTs','Q9s','Q8s','QJo','QTo','JTs','J9s','J8s','JTo','T9s','T8s','T7s','98s','97s','87s','86s','76s','75s','65s','54s']
+    call: ['JJ','TT','99','88','77','66','55','44','33','22','AQs','AJs','ATs','A9s','A8s','A7s','A6s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','65s','54s','AQo','AJo','ATo','KQo','KJo','QJo']
   },
+  // 对应图表: BB vs HJ
   'BB_vs_HJ': {
-    threebet_value: ['AA','AKs','AQs','AKo','AQo','KK','QQ','JJ','TT'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K5s','K4s'],
-    call: ['99','88','77','66','55','44','AJs','ATs','A9s','A8s','A7s','AJo','ATo','A9o','KQs','KJs','KTs','K9s','K8s','KQo','KJo','KTo','QJs','QTs','Q9s','Q8s','QJo','QTo','Q9o','JTs','J9s','J8s','JTo','T9s','T8s','T7s','98s','97s','87s','86s','76s','65s']
+    threebet_value: ['AA','KK','QQ','JJ','AKs','AQs','AKo','AQo'],
+    threebet_bluff: ['A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','K8s','K7s','K6s'],
+    call: ['TT','99','88','77','66','55','44','33','22','AJs','ATs','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','J8s','T9s','T8s','98s','87s','76s','65s','54s','AJo','ATo','KQo','KJo','QJo','JTo']
   },
+  // 对应图表: BB vs CO
   'BB_vs_CO': {
-    threebet_value: ['AA','AKs','AQs','AKo','AQo','KK','QQ','JJ','TT','99'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K5s','K4s','K3s','K2s'],
-    call: ['88','77','66','55','44','AJs','ATs','A9s','A8s','A7s','A6s','AJo','ATo','A9o','A8o','A7o','KQs','KJs','KTs','K9s','K8s','K7s','K6s','KQo','KJo','KTo','QJs','QTs','Q9s','Q8s','Q7s','Q6s','QJo','QTo','JTs','J9s','J8s','J7s','J6s','JTo','T9s','T8s','T7s','T6s','T9o','98s','97s','96s','98o','87s','86s','85s','87o','76s','75s','76o','65s','65o','54s']
+    threebet_value: ['AA','KK','QQ','JJ','TT','AKs','AQs','AJs','AKo','AQo'],
+    threebet_bluff: ['A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','K6s','K5s','K4s','K3s','Q6s','Q5s'],
+    call: ['99','88','77','66','55','44','33','22','ATs','KQs','KJs','KTs','K9s','K8s','K7s','QJs','QTs','Q9s','Q8s','JTs','J9s','J8s','T9s','T8s','98s','87s','76s','65s','54s','AJo','ATo','KQo','KJo','QJo','JTo']
   },
+  // 对应图表: BB vs BTN
   'BB_vs_BTN': {
-    threebet_value: ['AA','AKs','AQs','AJs','AKo','AQo','KK','QQ','JJ','TT','99','88'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','Q9s','Q8s','Q7s','Q6s','Q5s','J9s','J8s','J7s','J6s','J5s','T9s','T8s','T7s','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s'],
-    call: ['77','66','55','44','33','ATs','A9s','A8s','A7s','A6s','AJo','ATo','A9o','A8o','KQs','KJs','KTs','KQo','KJo','KTo','QJs','QTs','QJo','QTo','JTs','JTo','T9o','98o']
+    threebet_value: ['AA','KK','QQ','JJ','TT','99','88','AKs','AQs','AJs','ATs','AKo','AQo','AJo','KQo'],
+    threebet_bluff: ['A7s','A6s','A5s','A4s','A3s','A2s','K7s','K6s','K5s','K4s','K3s','K2s','Q7s','Q6s','Q5s','Q4s','J7s','J6s','J5s','T7s','T6s','97s','86s','75s','64s','53s'],
+    call: ['77','66','55','44','33','22','A9s','A8s','KQs','KJs','KTs','K9s','K8s','QJs','QTs','Q9s','Q8s','JTs','J9s','J8s','T9s','T8s','98s','87s','76s','ATo','A9o','KJo','KTo','QJo','QTo','JTo']
   },
+  // 对应图表: BB vs SB
   'BB_vs_SB': {
-    threebet_value: ['AA','AKs','AQs','AJs','AKo','AQo','AJo','KK','QQ','JJ','TT','99','88','77'],
-    threebet_bluff: ['A8s','A7s','A6s','A5s','A4s','A3s','A2s','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','J9s','J8s','J7s','J6s','J5s','J4s','J3s','T9s','T8s','T7s','T6s','T5s','98s','97s','96s','95s','87s','86s','85s','84s','76s','75s','74s','73s','65s','64s','63s','54s','53s','52s'],
-    call: ['66','55','44','33','22','ATs','A9s','ATo','A9o','A8o','A7o','A6o','A5o','KQs','KJs','KTs','KQo','KJo','KTo','K9o','QJs','QTs','QJo','QTo','Q9o','JTs','JTo','J9o','T9o','98o','87o']
+    threebet_value: ['AA','KK','QQ','JJ','TT','99','88','AKs','AQs','AJs','ATs','KQs','KJs','QJs','JTs','AKo','AQo','AJo','KQo','KJo','QJo'],
+    threebet_bluff: ['A5s','A4s','A3s','A2s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','J8s','J7s','J6s','J5s','J4s','T8s','T7s','T6s','97s','86s','75s','64s','53s'],
+    call: ['77','66','55','44','33','22','A9s','A8s','A7s','A6s','KTs','K9s','QTs','Q9s','J9s','T9s','98s','87s','76s','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KTo','K9o','K8o','QTo','Q9o','JTo','J9o','T9o','98o']
   },
 
   // Small Blind scenarios (Page 7)
@@ -835,8 +867,11 @@ function updateVillainButtons() {
   });
   container.appendChild(noneBtn);
 
-  // Add buttons for positions before hero
-  for (let i = 0; i < heroIndex && i < allPositions.length; i++) {
+  // Add buttons for positions that can raise before hero
+  // BB (index 0) can face all positions (1 to length-1)
+  // Other positions can face UTG (index 1) to their previous position
+  const endIndex = (heroIndex === 0) ? allPositions.length : heroIndex;
+  for (let i = 1; i < endIndex; i++) {
     const pos = allPositions[i];
     const btn = document.createElement('button');
     btn.className = 'villain-btn' + (selectedVillain === pos ? ' active' : '');
@@ -871,9 +906,9 @@ function updateDisplay() {
     updateRFIMatrix(heroPos);
   }
 
-  // Update hero navigation button states
-  document.getElementById('hero-prev').disabled = heroIndex === 0;
-  document.getElementById('hero-next').disabled = heroIndex === allPositions.length - 1;
+  // Navigation buttons are always enabled (circular navigation)
+  document.getElementById('hero-prev').disabled = false;
+  document.getElementById('hero-next').disabled = false;
 }
 
 // Navigation handlers
@@ -881,26 +916,31 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeMatrix();
   updateDisplay();
 
-  // Hero navigation
+  // Hero navigation (circular with modulo)
   document.getElementById('hero-prev').addEventListener('click', () => {
-    if (heroIndex > 0) {
-      heroIndex--;
-      // Reset villain if no longer valid
-      if (selectedVillain !== null) {
-        const villainIndex = allPositions.indexOf(selectedVillain);
-        if (villainIndex >= heroIndex) {
-          selectedVillain = null;
-        }
+    heroIndex = (heroIndex - 1 + allPositions.length) % allPositions.length;
+    // Reset villain if no longer valid for new hero position
+    if (selectedVillain !== null) {
+      const villainIndex = allPositions.indexOf(selectedVillain);
+      // Invalid if: hero is UTG (index 1), villain is BB (index 0), or villain position >= hero position
+      if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
+        selectedVillain = null;
       }
-      updateDisplay();
     }
+    updateDisplay();
   });
 
   document.getElementById('hero-next').addEventListener('click', () => {
-    if (heroIndex < allPositions.length - 1) {
-      heroIndex++;
-      updateDisplay();
+    heroIndex = (heroIndex + 1) % allPositions.length;
+    // Reset villain if no longer valid for new hero position
+    if (selectedVillain !== null) {
+      const villainIndex = allPositions.indexOf(selectedVillain);
+      // Invalid if: hero is UTG (index 1), villain is BB (index 0), or villain position >= hero position
+      if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
+        selectedVillain = null;
+      }
     }
+    updateDisplay();
   });
 
   // Swipe support for hero position
@@ -919,16 +959,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const diff = touchStartX - touchEndX;
 
     if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && heroIndex < allPositions.length - 1) {
+      if (diff > 0) {
         // Swipe left - next position
-        heroIndex++;
-        updateDisplay();
-      } else if (diff < 0 && heroIndex > 0) {
-        // Swipe right - previous position
-        heroIndex--;
+        heroIndex = (heroIndex + 1) % allPositions.length;
+        // Reset villain if no longer valid for new hero position
         if (selectedVillain !== null) {
           const villainIndex = allPositions.indexOf(selectedVillain);
-          if (villainIndex >= heroIndex) {
+          if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
+            selectedVillain = null;
+          }
+        }
+        updateDisplay();
+      } else if (diff < 0) {
+        // Swipe right - previous position
+        heroIndex = (heroIndex - 1 + allPositions.length) % allPositions.length;
+        // Reset villain if no longer valid for new hero position
+        if (selectedVillain !== null) {
+          const villainIndex = allPositions.indexOf(selectedVillain);
+          if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
             selectedVillain = null;
           }
         }
