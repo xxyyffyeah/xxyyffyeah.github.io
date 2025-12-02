@@ -1,6 +1,6 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Poker Strategy | Yifan Xu </title> <meta name="author" content="Yifan Xu"> <meta name="description" content="Interactive preflop RFI and defense ranges by position"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?3057b433faead8d6d7a40ee5dc592140"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://yfxu.org/poker-rfi/"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> poker | Yifan Xu </title> <meta name="author" content="Yifan Xu"> <meta name="description" content="Interactive preflop RFI and defense ranges by position"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?3057b433faead8d6d7a40ee5dc592140"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://yfxu.org/poker-rfi/"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Yifan Xu </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/assets/pdf/Yifan_Xu_Resume_phd.pdf">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/teaching/">teaching </a> </li> <li class="nav-item active"> <a class="nav-link" href="/poker-rfi/">Poker Strategy <span class="sr-only">(current)</span> </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Poker Strategy</h1> <p class="post-description">Interactive preflop RFI and defense ranges by position</p> </header> <article> <style>.poker-strategy-tool{max-width:900px;margin:0 auto;padding:20px}.position-controls{background:#f8f9fa;border-radius:12px;padding:20px;margin-bottom:20px}.position-row,.villain-row{margin:15px 0}.control-label{font-weight:700;color:#495057;font-size:1.05em;margin-bottom:12px;text-align:center;display:block}.hero-nav{display:flex;align-items:center;justify-content:center;gap:15px}.position-display{min-width:120px;padding:12px 20px;background:white;border:2px solid #dee2e6;border-radius:8px;text-align:center;font-weight:700;font-size:1.1em;color:#212529;user-select:none}.nav-btn{width:50px;height:50px;border:2px solid #007bff;background:white;color:#007bff;border-radius:50%;font-size:1.5em;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;font-weight:bold;user-select:none}.nav-btn:hover{background:#007bff;color:white;transform:scale(1.1)}.nav-btn:active{transform:scale(0.95)}.nav-btn:disabled{opacity:.3;cursor:not-allowed;border-color:#dee2e6;color:#dee2e6}.nav-btn:disabled:hover{background:white;color:#dee2e6;transform:scale(1)}.villain-buttons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}.villain-btn{padding:10px 18px;border:2px solid #dee2e6;background:white;color:#495057;border-radius:8px;font-weight:600;font-size:.95em;cursor:pointer;transition:all .2s;min-width:75px;text-align:center}.villain-btn:hover{background:#f8f9fa;border-color:#007bff;transform:translateY(-2px)}.villain-btn.active{background:#007bff;color:white;border-color:#007bff;box-shadow:0 2px 8px rgba(0,123,255,0.3)}.villain-btn.none{background:#e9ecef;border-color:#adb5bd;color:#6c757d}.villain-btn.none.active{background:#6c757d;color:white;border-color:#6c757d}.villain-btn:disabled{opacity:.3;cursor:not-allowed}.villain-btn:disabled:hover{transform:none;background:white;border-color:#dee2e6}.hand-matrix{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;max-width:800px;margin:20px auto;background:#dee2e6;padding:2px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}.hand-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95em;border:1px solid #adb5bd;cursor:default;user-select:none;transition:transform .1s}.hand-cell:hover{transform:scale(1.05);z-index:10}.hand-cell.fold{background:#e9ecef;color:#6c757d}.hand-cell.raise{background:#dc3545;color:white}.hand-cell.raise-value{background:#c82333;color:white}.hand-cell.raise-bluff{background:#0069d9;color:white}.hand-cell.threebet-value{background:#c82333;color:white}.hand-cell.threebet-bluff{background:#0069d9;color:white}.hand-cell.limp{background:#28a745;color:white}.hand-cell.call{background:#20c997;color:white}.legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0;padding:15px;background:white;border-radius:8px;border:1px solid #dee2e6}.legend-item{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:6px;background:#f8f9fa}.legend-color{width:28px;height:28px;border-radius:6px;border:2px solid rgba(0,0,0,0.1)}.legend-text{font-size:.9em;font-weight:600;color:#495057}@media(max-width:768px){.poker-strategy-tool{padding:10px}.position-display{min-width:100px;font-size:1em}.nav-btn{width:48px;height:48px;font-size:1.3em}.villain-btn{padding:8px 14px;font-size:.9em;min-width:65px}.hand-matrix{font-size:.65em;gap:1px;padding:1px}.legend{gap:8px;padding:12px}.legend-item{padding:4px 8px}.legend-color{width:24px;height:24px}.legend-text{font-size:.8em}}@media(max-width:480px){.hand-matrix{font-size:.55em}.position-display{min-width:90px;padding:10px 16px;font-size:.95em}.nav-btn{width:44px;height:44px}.villain-btn{padding:7px 12px;font-size:.85em;min-width:60px}}@media(prefers-color-scheme:dark){.position-controls{background:#2d3748}.position-display{background:#1a202c;border-color:#4a5568;color:#e2e8f0}.nav-btn{background:#2d3748;border-color:#3182ce;color:#3182ce}.nav-btn:hover{background:#3182ce;color:white}.villain-btn{background:#1a202c;border-color:#4a5568;color:#e2e8f0}.villain-btn.active{background:#3182ce;border-color:#3182ce}.villain-btn.none{background:#2d3748;border-color:#4a5568;color:#a0aec0}.villain-btn.none.active{background:#4a5568;color:#e2e8f0}.legend{background:#2d3748;border-color:#4a5568}.legend-item{background:#1a202c}.legend-text{color:#e2e8f0}.control-label{color:#e2e8f0}}.swipe-hint{text-align:center;color:#6c757d;font-size:.85em;margin-top:10px;font-style:italic}@media(min-width:769px){.swipe-hint{display:none}}</style> <div class="poker-strategy-tool"> <p style="text-align: center; color: #6c757d; margin-bottom: 25px;"> Navigate your position with arrows, then select a villain to see defense strategy (or "None" for RFI). </p> <div class="position-controls"> <div class="position-row"> <label class="control-label">Your Position:</label> <div class="hero-nav"> <button class="nav-btn prev" id="hero-prev" aria-label="Previous position">◀</button> <div class="position-display" id="hero-position">UTG</div> <button class="nav-btn next" id="hero-next" aria-label="Next position">▶</button> </div> <div class="swipe-hint">💡 Swipe left/right to navigate</div> </div> <div class="villain-row"> <label class="control-label">Villain:</label> <div class="villain-buttons" id="villain-buttons"> </div> </div> </div> <div class="legend" id="legend"></div> <div class="hand-matrix" id="hand-matrix"></div> </div> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Yifan Xu </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/assets/pdf/Yifan_Xu_Resume_phd.pdf">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/teaching/">teaching </a> </li> <li class="nav-item active"> <a class="nav-link" href="/poker-rfi/">poker <span class="sr-only">(current)</span> </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">poker</h1> <p class="post-description">Interactive preflop RFI and defense ranges by position</p> </header> <article> <style>.poker-strategy-tool{max-width:900px;margin:0 auto;padding:20px}.position-controls{background:#f8f9fa;border-radius:12px;padding:20px;margin-bottom:20px}.position-row,.villain-row{margin:15px 0}.control-label{font-weight:700;color:#495057;font-size:1.05em;margin-bottom:12px;text-align:center;display:block}.hero-nav{display:flex;align-items:center;justify-content:center;gap:15px}.position-display{min-width:120px;padding:12px 20px;background:white;border:2px solid #dee2e6;border-radius:8px;text-align:center;font-weight:700;font-size:1.1em;color:#212529;user-select:none}.nav-btn{width:50px;height:50px;border:2px solid #007bff;background:white;color:#007bff;border-radius:50%;font-size:1.5em;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;font-weight:bold;user-select:none}.nav-btn:hover{background:#007bff;color:white;transform:scale(1.1)}.nav-btn:active{transform:scale(0.95)}.nav-btn:disabled{opacity:.3;cursor:not-allowed;border-color:#dee2e6;color:#dee2e6}.nav-btn:disabled:hover{background:white;color:#dee2e6;transform:scale(1)}.villain-buttons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}.villain-btn{padding:10px 18px;border:2px solid #dee2e6;background:white;color:#495057;border-radius:8px;font-weight:600;font-size:.95em;cursor:pointer;transition:all .2s;min-width:75px;text-align:center}.villain-btn:hover{background:#f8f9fa;border-color:#007bff;transform:translateY(-2px)}.villain-btn.active{background:#007bff;color:white;border-color:#007bff;box-shadow:0 2px 8px rgba(0,123,255,0.3)}.villain-btn.none{background:#e9ecef;border-color:#adb5bd;color:#6c757d}.villain-btn.none.active{background:#6c757d;color:white;border-color:#6c757d}.villain-btn:disabled{opacity:.3;cursor:not-allowed}.villain-btn:disabled:hover{transform:none;background:white;border-color:#dee2e6}.hand-matrix{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;max-width:800px;margin:20px auto;background:#dee2e6;padding:2px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}.hand-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95em;border:1px solid #adb5bd;cursor:default;user-select:none;transition:transform .1s}.hand-cell:hover{transform:scale(1.05);z-index:10}.hand-cell.fold{background:#e9ecef;color:#6c757d}.hand-cell.raise{background:#dc3545;color:white}.hand-cell.raise-value{background:#c82333;color:white}.hand-cell.raise-bluff{background:#0069d9;color:white}.hand-cell.threebet-value{background:#c82333;color:white}.hand-cell.threebet-bluff{background:#0069d9;color:white}.hand-cell.limp{background:#28a745;color:white}.hand-cell.call{background:#20c997;color:white}.legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0;padding:15px;background:white;border-radius:8px;border:1px solid #dee2e6}.legend-item{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:6px;background:#f8f9fa}.legend-color{width:28px;height:28px;border-radius:6px;border:2px solid rgba(0,0,0,0.1)}.legend-text{font-size:.9em;font-weight:600;color:#495057}@media(max-width:768px){.poker-strategy-tool{padding:10px}.position-display{min-width:100px;font-size:1em}.nav-btn{width:48px;height:48px;font-size:1.3em}.villain-btn{padding:8px 14px;font-size:.9em;min-width:65px}.hand-matrix{font-size:.65em;gap:1px;padding:1px}.legend{gap:8px;padding:12px}.legend-item{padding:4px 8px}.legend-color{width:24px;height:24px}.legend-text{font-size:.8em}}@media(max-width:480px){.hand-matrix{font-size:.55em}.position-display{min-width:90px;padding:10px 16px;font-size:.95em}.nav-btn{width:44px;height:44px}.villain-btn{padding:7px 12px;font-size:.85em;min-width:60px}}@media(prefers-color-scheme:dark){.position-controls{background:#2d3748}.position-display{background:#1a202c;border-color:#4a5568;color:#e2e8f0}.nav-btn{background:#2d3748;border-color:#3182ce;color:#3182ce}.nav-btn:hover{background:#3182ce;color:white}.villain-btn{background:#1a202c;border-color:#4a5568;color:#e2e8f0}.villain-btn.active{background:#3182ce;border-color:#3182ce}.villain-btn.none{background:#2d3748;border-color:#4a5568;color:#a0aec0}.villain-btn.none.active{background:#4a5568;color:#e2e8f0}.legend{background:#2d3748;border-color:#4a5568}.legend-item{background:#1a202c}.legend-text{color:#e2e8f0}.control-label{color:#e2e8f0}}.swipe-hint{text-align:center;color:#6c757d;font-size:.85em;margin-top:10px;font-style:italic}@media(min-width:769px){.swipe-hint{display:none}}</style> <div class="poker-strategy-tool"> <p style="text-align: center; color: #6c757d; margin-bottom: 25px;"> Navigate your position with arrows, then select a villain to see defense strategy (or "None" for RFI). </p> <div class="position-controls"> <div class="position-row"> <label class="control-label">Your Position:</label> <div class="hero-nav"> <button class="nav-btn prev" id="hero-prev" aria-label="Previous position">◀</button> <div class="position-display" id="hero-position">BB</div> <button class="nav-btn next" id="hero-next" aria-label="Next position">▶</button> </div> <div class="swipe-hint">💡 Swipe left/right to navigate</div> </div> <div class="villain-row"> <label class="control-label">Villain:</label> <div class="villain-buttons" id="villain-buttons"> </div> </div> </div> <div class="legend" id="legend"></div> <div class="hand-matrix" id="hand-matrix"></div> </div> <script>
 // Hand matrix structure
 const hands = [
   ['AA', 'AKs', 'AQs', 'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s'],
@@ -18,8 +18,8 @@ const hands = [
   ['A2o', 'K2o', 'Q2o', 'J2o', 'T2o', '92o', '82o', '72o', '62o', '52o', '42o', '32o', '22']
 ];
 
-// Position arrays
-const allPositions = ['UTG', 'UTG+1', 'UTG+2', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
+// Position arrays (clockwise order around the table, starting from BB)
+const allPositions = ['BB', 'UTG', 'UTG+1', 'UTG+2', 'LJ', 'HJ', 'CO', 'BTN', 'SB'];
 
 // State
 let heroIndex = 0;
@@ -30,37 +30,37 @@ const rfiRanges = {
   'UTG': {
     name: 'UTG - Raise First In',
     stats: 'Raise: 10.1% | Fold: 89.9%',
-    raise: ['AA','KK','QQ','JJ','TT','99','AKs','AQs','AJs','ATs','A5s','A4s','AKo','KQs','KJs','QJs','JTs','T9s','98s','87s','76s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A5s','AKo','KQs','KJs','KTs','QJs','QTs','JTs','T9s','98s']
   },
   'UTG+1': {
     name: 'UTG+1 - Raise First In',
     stats: 'Raise: 14.3% | Fold: 85.7%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','AKs','AQs','AJs','ATs','A9s','A5s','A4s','A3s','AKo','AQo','KQs','KJs','KTs','QJs','JTs','T9s','98s','87s','76s','65s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','AKo','AQo','AJo','KQo']
   },
   'UTG+2': {
     name: 'UTG+2 - Raise First In',
     stats: 'Raise: 15.7% | Fold: 84.3%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','AKs','AQs','AJs','ATs','A9s','A8s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','KQs','KJs','KTs','K9s','QJs','QTs','JTs','T9s','98s','87s','76s','65s','54s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','AKo','AQo','AJo','KQo']
   },
   'LJ': {
     name: 'Lojack - Raise First In',
     stats: 'Raise: 18.3% | Fold: 81.7%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','T8s','98s','87s','76s','65s','54s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','65s','AKo','AQo','AJo','ATo','KQo','KJo']
   },
   'HJ': {
     name: 'Hijack - Raise First In',
     stats: 'Raise: 21.3% | Fold: 78.7%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','A9o','KQs','KJs','KTs','K9s','K8s','KQo','QJs','QTs','Q9s','JTs','J9s','T9s','T8s','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','QJs','QTs','Q9s','JTs','J9s','T9s','T8s','98s','97s','87s','76s','65s','54s','AKo','AQo','AJo','ATo','KQo','KJo','QJo']
   },
   'CO': {
     name: 'Cutoff - Raise First In',
     stats: 'Raise: 27.0% | Fold: 73.0%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','KQo','KJo','QJs','QTs','Q9s','Q8s','QJo','JTs','J9s','J8s','T9s','T8s','T7s','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','K7s','QJs','QTs','Q9s','Q8s','JTs','J9s','J8s','T9s','T8s','98s','97s','87s','86s','76s','75s','65s','64s','54s','43s','AKo','AQo','AJo','ATo','A9o','KQo','KJo','KTo','QJo','QTo','JTo']
   },
   'BTN': {
     name: 'Button - Raise First In',
     stats: 'Raise: 51.1% | Fold: 48.9%',
-    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','KQo','KJo','KTo','K9o','K8o','K7o','K6o','K5o','QJs','QTs','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','Q2s','QJo','QTo','Q9o','Q8o','JTs','J9s','J8s','J7s','J6s','J5s','J4s','JTo','J9o','J8o','T9s','T8s','T7s','T6s','T5s','T9o','T8o','98s','97s','96s','95s','98o','87s','86s','85s','84s','87o','76s','75s','74s','76o','65s','64s','63s','65o','54s','53s','52s','54o','43s']
+    raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','QJs','QTs','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','Q2s','JTs','J9s','J8s','J7s','J6s','T9s','T8s','T7s','T6s','98s','97s','96s','87s','86s','76s','65s','54s','43s','32s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KQo','KJo','KTo','K9o','K8o','K7o','QJo','QTo','Q9o','JTo','J9o','T9o']
   },
   'SB': {
     name: 'Small Blind - RFI Strategy',
@@ -78,46 +78,78 @@ const rfiRanges = {
 
 // Facing RFI Ranges - Complete data from PDF
 const facingRFI = {
-  // Big Blind scenarios (Page 8)
+  //BB
+// 对应图表: BB vs UTG/UTG+1
   'BB_vs_UTG': {
-    threebet_value: ['AA','AKs','AKo','KK','QQ'],
-    threebet_bluff: ['A5s','A4s'],
-    call: ['JJ','TT','99','88','77','AQs','AJs','ATs','AQo','AJo','KQs','KJs','KTs','KQo','QJs','QTs','JTs','T9s','98s','87s','76s']
+    threebet_value: ['AA', 'KK', 'QQ', 'AKs', 'AQs'],
+    threebet_bluff: ['86s', '76s', '75s', '65s', '64s', '54s', '43s'],
+    call: [
+      'JJ', 'TT', '99', '88', '77', '66', '55', '44', '33', '22',
+      'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s',
+      'KQs', 'KJs', 'KTs', 'K9s', 'K8s', 'K7s', 'K6s', 'K5s',
+      'QJs', 'QTs', 'Q9s', 'Q8s', 'Q7s',
+      'JTs', 'J9s', 'J8s', 'J7s',
+      'T9s', 'T8s', 'T7s',
+      '98s', '97s',
+      '87s',
+      'AKo', 'AQo', 'AJo', 'ATo',
+      'KQo', 'KJo',
+      'QJo'
+    ]
   },
+  // 对应图表: BB vs UTG/UTG+1 (相同数据)
   'BB_vs_UTG+1': {
-    threebet_value: ['AA','AKs','AKo','KK','QQ'],
-    threebet_bluff: ['A5s','A4s'],
-    call: ['JJ','TT','99','88','77','AQs','AJs','ATs','AQo','AJo','KQs','KJs','KTs','KQo','QJs','QTs','JTs','T9s','98s','87s','76s']
+    threebet_value: ['AA', 'KK', 'QQ', 'AKs', 'AQs'],
+    threebet_bluff: ['86s', '76s', '75s', '65s', '64s', '54s', '43s'],
+    call: [
+      'JJ', 'TT', '99', '88', '77', '66', '55', '44', '33', '22',
+      'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s',
+      'KQs', 'KJs', 'KTs', 'K9s', 'K8s', 'K7s', 'K6s', 'K5s',
+      'QJs', 'QTs', 'Q9s', 'Q8s', 'Q7s',
+      'JTs', 'J9s', 'J8s', 'J7s',
+      'T9s', 'T8s', 'T7s',
+      '98s', '97s',
+      '87s',
+      'AKo', 'AQo', 'AJo', 'ATo',
+      'KQo', 'KJo',
+      'QJo'
+    ]
   },
+  // 对应图表: BB vs UTG+2
   'BB_vs_UTG+2': {
-    threebet_value: ['AA','AKs','AQs','AKo','KK','QQ','JJ'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s'],
-    call: ['TT','99','88','77','66','AJs','ATs','A9s','AQo','AJo','ATo','KQs','KJs','KTs','K9s','KQo','KJo','QJs','QTs','Q9s','QJo','JTs','J9s','T9s','T8s','98s','87s','76s','65s']
+    threebet_value: ['AA','KK','AKs','AKo'],
+    threebet_bluff: ['A5s','A4s','A3s'],
+    call: ['QQ','JJ','TT','99','88','77','66','55','44','33','22','AQs','AJs','ATs','A9s','A8s','A7s','A6s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','65s','54s','AQo','AJo','ATo','KQo','KJo','QJo']
   },
+  // 对应图表: BB vs LJ
   'BB_vs_LJ': {
-    threebet_value: ['AA','AKs','AQs','AKo','AQo','KK','QQ','JJ'],
+    threebet_value: ['AA','KK','QQ','AKs','AKo'],
     threebet_bluff: ['A5s','A4s','A3s','A2s'],
-    call: ['TT','99','88','77','66','55','AJs','ATs','A9s','A8s','AJo','ATo','A9o','KQs','KJs','KTs','K9s','KQo','KJo','KTo','QJs','QTs','Q9s','Q8s','QJo','QTo','JTs','J9s','J8s','JTo','T9s','T8s','T7s','98s','97s','87s','86s','76s','75s','65s','54s']
+    call: ['JJ','TT','99','88','77','66','55','44','33','22','AQs','AJs','ATs','A9s','A8s','A7s','A6s','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','T9s','98s','87s','76s','65s','54s','AQo','AJo','ATo','KQo','KJo','QJo']
   },
+  // 对应图表: BB vs HJ
   'BB_vs_HJ': {
-    threebet_value: ['AA','AKs','AQs','AKo','AQo','KK','QQ','JJ','TT'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K5s','K4s'],
-    call: ['99','88','77','66','55','44','AJs','ATs','A9s','A8s','A7s','AJo','ATo','A9o','KQs','KJs','KTs','K9s','K8s','KQo','KJo','KTo','QJs','QTs','Q9s','Q8s','QJo','QTo','Q9o','JTs','J9s','J8s','JTo','T9s','T8s','T7s','98s','97s','87s','86s','76s','65s']
+    threebet_value: ['AA','KK','QQ','JJ','AKs','AQs','AKo','AQo'],
+    threebet_bluff: ['A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','K8s','K7s','K6s'],
+    call: ['TT','99','88','77','66','55','44','33','22','AJs','ATs','KQs','KJs','KTs','K9s','QJs','QTs','Q9s','JTs','J9s','J8s','T9s','T8s','98s','87s','76s','65s','54s','AJo','ATo','KQo','KJo','QJo','JTo']
   },
+  // 对应图表: BB vs CO
   'BB_vs_CO': {
-    threebet_value: ['AA','AKs','AQs','AKo','AQo','KK','QQ','JJ','TT','99'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K5s','K4s','K3s','K2s'],
-    call: ['88','77','66','55','44','AJs','ATs','A9s','A8s','A7s','A6s','AJo','ATo','A9o','A8o','A7o','KQs','KJs','KTs','K9s','K8s','K7s','K6s','KQo','KJo','KTo','QJs','QTs','Q9s','Q8s','Q7s','Q6s','QJo','QTo','JTs','J9s','J8s','J7s','J6s','JTo','T9s','T8s','T7s','T6s','T9o','98s','97s','96s','98o','87s','86s','85s','87o','76s','75s','76o','65s','65o','54s']
+    threebet_value: ['AA','KK','QQ','JJ','TT','AKs','AQs','AJs','AKo','AQo'],
+    threebet_bluff: ['A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','K6s','K5s','K4s','K3s','Q6s','Q5s'],
+    call: ['99','88','77','66','55','44','33','22','ATs','KQs','KJs','KTs','K9s','K8s','K7s','QJs','QTs','Q9s','Q8s','JTs','J9s','J8s','T9s','T8s','98s','87s','76s','65s','54s','AJo','ATo','KQo','KJo','QJo','JTo']
   },
+  // 对应图表: BB vs BTN
   'BB_vs_BTN': {
-    threebet_value: ['AA','AKs','AQs','AJs','AKo','AQo','KK','QQ','JJ','TT','99','88'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','Q9s','Q8s','Q7s','Q6s','Q5s','J9s','J8s','J7s','J6s','J5s','T9s','T8s','T7s','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s'],
-    call: ['77','66','55','44','33','ATs','A9s','A8s','A7s','A6s','AJo','ATo','A9o','A8o','KQs','KJs','KTs','KQo','KJo','KTo','QJs','QTs','QJo','QTo','JTs','JTo','T9o','98o']
+    threebet_value: ['AA','KK','QQ','JJ','TT','99','88','AKs','AQs','AJs','ATs','AKo','AQo','AJo','KQo'],
+    threebet_bluff: ['A7s','A6s','A5s','A4s','A3s','A2s','K7s','K6s','K5s','K4s','K3s','K2s','Q7s','Q6s','Q5s','Q4s','J7s','J6s','J5s','T7s','T6s','97s','86s','75s','64s','53s'],
+    call: ['77','66','55','44','33','22','A9s','A8s','KQs','KJs','KTs','K9s','K8s','QJs','QTs','Q9s','Q8s','JTs','J9s','J8s','T9s','T8s','98s','87s','76s','ATo','A9o','KJo','KTo','QJo','QTo','JTo']
   },
+  // 对应图表: BB vs SB
   'BB_vs_SB': {
-    threebet_value: ['AA','AKs','AQs','AJs','AKo','AQo','AJo','KK','QQ','JJ','TT','99','88','77'],
-    threebet_bluff: ['A8s','A7s','A6s','A5s','A4s','A3s','A2s','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','J9s','J8s','J7s','J6s','J5s','J4s','J3s','T9s','T8s','T7s','T6s','T5s','98s','97s','96s','95s','87s','86s','85s','84s','76s','75s','74s','73s','65s','64s','63s','54s','53s','52s'],
-    call: ['66','55','44','33','22','ATs','A9s','ATo','A9o','A8o','A7o','A6o','A5o','KQs','KJs','KTs','KQo','KJo','KTo','K9o','QJs','QTs','QJo','QTo','Q9o','JTs','JTo','J9o','T9o','98o','87o']
+    threebet_value: ['AA','KK','QQ','JJ','TT','99','88','AKs','AQs','AJs','ATs','KQs','KJs','QJs','JTs','AKo','AQo','AJo','KQo','KJo','QJo'],
+    threebet_bluff: ['A5s','A4s','A3s','A2s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','J8s','J7s','J6s','J5s','J4s','T8s','T7s','T6s','97s','86s','75s','64s','53s'],
+    call: ['77','66','55','44','33','22','A9s','A8s','A7s','A6s','KTs','K9s','QTs','Q9s','J9s','T9s','98s','87s','76s','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KTo','K9o','K8o','QTo','Q9o','JTo','J9o','T9o','98o']
   },
 
   // Small Blind scenarios (Page 7)
@@ -385,8 +417,11 @@ function updateVillainButtons() {
   });
   container.appendChild(noneBtn);
 
-  // Add buttons for positions before hero
-  for (let i = 0; i < heroIndex && i < allPositions.length; i++) {
+  // Add buttons for positions that can raise before hero
+  // BB (index 0) can face all positions (1 to length-1)
+  // Other positions can face UTG (index 1) to their previous position
+  const endIndex = (heroIndex === 0) ? allPositions.length : heroIndex;
+  for (let i = 1; i < endIndex; i++) {
     const pos = allPositions[i];
     const btn = document.createElement('button');
     btn.className = 'villain-btn' + (selectedVillain === pos ? ' active' : '');
@@ -421,9 +456,9 @@ function updateDisplay() {
     updateRFIMatrix(heroPos);
   }
 
-  // Update hero navigation button states
-  document.getElementById('hero-prev').disabled = heroIndex === 0;
-  document.getElementById('hero-next').disabled = heroIndex === allPositions.length - 1;
+  // Navigation buttons are always enabled (circular navigation)
+  document.getElementById('hero-prev').disabled = false;
+  document.getElementById('hero-next').disabled = false;
 }
 
 // Navigation handlers
@@ -431,26 +466,31 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeMatrix();
   updateDisplay();
 
-  // Hero navigation
+  // Hero navigation (circular with modulo)
   document.getElementById('hero-prev').addEventListener('click', () => {
-    if (heroIndex > 0) {
-      heroIndex--;
-      // Reset villain if no longer valid
-      if (selectedVillain !== null) {
-        const villainIndex = allPositions.indexOf(selectedVillain);
-        if (villainIndex >= heroIndex) {
-          selectedVillain = null;
-        }
+    heroIndex = (heroIndex - 1 + allPositions.length) % allPositions.length;
+    // Reset villain if no longer valid for new hero position
+    if (selectedVillain !== null) {
+      const villainIndex = allPositions.indexOf(selectedVillain);
+      // Invalid if: hero is UTG (index 1), villain is BB (index 0), or villain position >= hero position
+      if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
+        selectedVillain = null;
       }
-      updateDisplay();
     }
+    updateDisplay();
   });
 
   document.getElementById('hero-next').addEventListener('click', () => {
-    if (heroIndex < allPositions.length - 1) {
-      heroIndex++;
-      updateDisplay();
+    heroIndex = (heroIndex + 1) % allPositions.length;
+    // Reset villain if no longer valid for new hero position
+    if (selectedVillain !== null) {
+      const villainIndex = allPositions.indexOf(selectedVillain);
+      // Invalid if: hero is UTG (index 1), villain is BB (index 0), or villain position >= hero position
+      if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
+        selectedVillain = null;
+      }
     }
+    updateDisplay();
   });
 
   // Swipe support for hero position
@@ -469,16 +509,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const diff = touchStartX - touchEndX;
 
     if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && heroIndex < allPositions.length - 1) {
+      if (diff > 0) {
         // Swipe left - next position
-        heroIndex++;
-        updateDisplay();
-      } else if (diff < 0 && heroIndex > 0) {
-        // Swipe right - previous position
-        heroIndex--;
+        heroIndex = (heroIndex + 1) % allPositions.length;
+        // Reset villain if no longer valid for new hero position
         if (selectedVillain !== null) {
           const villainIndex = allPositions.indexOf(selectedVillain);
-          if (villainIndex >= heroIndex) {
+          if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
+            selectedVillain = null;
+          }
+        }
+        updateDisplay();
+      } else if (diff < 0) {
+        // Swipe right - previous position
+        heroIndex = (heroIndex - 1 + allPositions.length) % allPositions.length;
+        // Reset villain if no longer valid for new hero position
+        if (selectedVillain !== null) {
+          const villainIndex = allPositions.indexOf(selectedVillain);
+          if (heroIndex === 1 || villainIndex === 0 || villainIndex >= heroIndex) {
             selectedVillain = null;
           }
         }

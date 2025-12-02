@@ -37,8 +37,8 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
-        },{id: "nav-poker-strategy",
-          title: "Poker Strategy",
+        },{id: "nav-poker",
+          title: "poker",
           description: "Interactive preflop RFI and defense ranges by position",
           section: "Navigation",
           handler: () => {
