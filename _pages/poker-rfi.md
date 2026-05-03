@@ -8,167 +8,199 @@ nav_order: 7
 ---
 
 <style>
-/* Main Container */
+/* ============================================================
+   Poker RFI tool — tuned to match the site's academic palette.
+   All chrome derives from --global-* variables, with a small
+   set of action colors layered on top via local custom props.
+   ============================================================ */
+
 .poker-strategy-tool {
-  max-width: 900px;
+  --pkr-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Monaco,
+              Consolas, "Liberation Mono", "Courier New", monospace;
+  --pkr-border: var(--global-divider-color);
+  --pkr-text: var(--global-text-color);
+  --pkr-soft: var(--global-text-color-light);
+  --pkr-accent: var(--global-theme-color);
+  --pkr-surface: rgba(0, 0, 0, 0.025);
+  --pkr-fold-bg: rgba(0, 0, 0, 0.045);
+  --pkr-raise: #b71c1c;        /* deep crimson — value raises / 3-bet value */
+  --pkr-bluff: #0076df;        /* site blue   — bluff raises / 3-bet bluff  */
+  --pkr-limp:  #00834a;        /* muted green — SB limps                    */
+  --pkr-call:  #2698ba;        /* site cyan   — defensive calls             */
+  --pkr-on-color: #ffffff;
+
+  /* Sized to fit a single laptop viewport without scrolling.
+     The square matrix dominates height, so width is bounded by both
+     a pixel cap and a viewport-height fraction (after subtracting the
+     ~310px taken by intro + controls + legend + help). */
+  max-width: clamp(280px, calc(100vh - 310px), 520px);
   margin: 0 auto;
-  padding: 20px;
+  padding: 0;
+  font-feature-settings: "tnum" 1, "ss01" 1;
 }
 
-/* Position Controls */
-.position-controls {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
+html[data-theme="dark"] .poker-strategy-tool {
+  --pkr-surface: rgba(255, 255, 255, 0.04);
+  --pkr-fold-bg: rgba(255, 255, 255, 0.05);
+  --pkr-raise: #e95757;
+  --pkr-bluff: #4ba8e6;
+  --pkr-limp:  #2bb673;
+  --pkr-call:  #5cc4d6;
 }
 
-.position-row,
-.villain-row {
-  margin: 15px 0;
-}
-
-.control-label {
-  font-weight: 700;
-  color: #495057;
-  font-size: 1.05em;
-  margin-bottom: 12px;
+/* ---------- Intro ---------- */
+.pkr-intro {
   text-align: center;
+  color: var(--pkr-soft);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  margin: 0 auto 0.9rem;
+  max-width: 520px;
+}
+
+/* ---------- Control panel ---------- */
+.pkr-controls {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.85rem;
+  background: var(--pkr-surface);
+  border: 1px solid var(--pkr-border);
+  border-radius: 4px;
+}
+
+.pkr-row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.pkr-label {
+  font-family: var(--pkr-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pkr-soft);
+  font-weight: 600;
+}
+
+/* Hero navigator */
+.pkr-hero {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  gap: 0.5rem;
+}
+
+.pkr-hero-display {
+  flex: 1;
+  text-align: center;
+  user-select: none;
+}
+
+.pkr-hero-position {
+  font-family: var(--pkr-mono);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--pkr-text);
+  line-height: 1.1;
+}
+
+.pkr-hero-meta {
   display: block;
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pkr-soft);
+  min-height: 1em;
 }
 
-/* Hero Position Navigation */
-.hero-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-.position-display {
-  min-width: 120px;
-  padding: 12px 20px;
-  background: white;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 1.1em;
-  color: #212529;
-  user-select: none;
-}
-
-.nav-btn {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #007bff;
-  background: white;
-  color: #007bff;
-  border-radius: 50%;
-  font-size: 1.5em;
+.pkr-nav-btn {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--pkr-border);
+  background: transparent;
+  color: var(--pkr-soft);
+  border-radius: 999px;
+  font-size: 0.7rem;
   cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
+  transition: border-color 0.15s ease, color 0.15s ease,
+              transform 0.1s ease;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  user-select: none;
 }
 
-.nav-btn:hover {
-  background: #007bff;
-  color: white;
-  transform: scale(1.1);
+.pkr-nav-btn:hover {
+  border-color: var(--pkr-accent);
+  color: var(--pkr-accent);
 }
 
-.nav-btn:active {
-  transform: scale(0.95);
-}
+.pkr-nav-btn:active { transform: scale(0.94); }
 
-.nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  border-color: #dee2e6;
-  color: #dee2e6;
-}
-
-.nav-btn:disabled:hover {
-  background: white;
-  color: #dee2e6;
-  transform: scale(1);
-}
-
-/* Villain Buttons */
-.villain-buttons {
+/* Villain pills */
+.pkr-villains {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 10px;
+  gap: 0.4rem;
 }
 
-.villain-btn {
-  padding: 10px 18px;
-  border: 2px solid #dee2e6;
-  background: white;
-  color: #495057;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95em;
+.pkr-villain-btn {
+  flex: 1 1 auto;
+  min-width: 48px;
+  padding: 0.32rem 0.5rem;
+  border: 1px solid var(--pkr-border);
+  background: var(--global-bg-color);
+  color: var(--pkr-text);
+  border-radius: 3px;
+  font-family: var(--pkr-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  transition: all 0.2s;
-  min-width: 75px;
-  text-align: center;
+  transition: border-color 0.15s ease, color 0.15s ease,
+              background 0.15s ease;
 }
 
-.villain-btn:hover {
-  background: #f8f9fa;
-  border-color: #007bff;
-  transform: translateY(-2px);
+.pkr-villain-btn:hover {
+  border-color: var(--pkr-accent);
+  color: var(--pkr-accent);
 }
 
-.villain-btn.active {
-  background: #007bff;
-  color: white;
-  border-color: #007bff;
-  box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+.pkr-villain-btn.active {
+  background: var(--pkr-accent);
+  color: var(--global-bg-color);
+  border-color: var(--pkr-accent);
 }
 
-.villain-btn.none {
-  background: #e9ecef;
-  border-color: #adb5bd;
-  color: #6c757d;
+.pkr-villain-btn.none {
+  font-style: italic;
+  color: var(--pkr-soft);
 }
 
-.villain-btn.none.active {
-  background: #6c757d;
-  color: white;
-  border-color: #6c757d;
+.pkr-villain-btn.none.active {
+  background: var(--pkr-text);
+  color: var(--global-bg-color);
+  border-color: var(--pkr-text);
+  font-style: normal;
 }
 
-.villain-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.villain-btn:disabled:hover {
-  transform: none;
-  background: white;
-  border-color: #dee2e6;
-}
-
-
-/* Hand Matrix */
+/* ---------- Hand matrix ---------- */
 .hand-matrix {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
-  gap: 2px;
-  max-width: 800px;
-  margin: 20px auto;
-  background: #dee2e6;
-  padding: 2px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  gap: 1px;
+  background: var(--pkr-border);
+  border: 1px solid var(--pkr-border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 auto 0.75rem;
 }
 
 .hand-cell {
@@ -176,278 +208,216 @@ nav_order: 7
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.95em;
-  border: 1px solid #adb5bd;
-  cursor: default;
+  font-family: var(--pkr-mono);
+  font-size: clamp(0.5rem, 1.05vw, 0.7rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   user-select: none;
-  transition: transform 0.1s;
+  background: var(--pkr-fold-bg);
+  color: var(--pkr-soft);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.hand-cell:hover {
-  transform: scale(1.05);
-  z-index: 10;
-}
-
-/* Action Colors */
 .hand-cell.fold {
-  background: #e9ecef;
-  color: #6c757d;
+  background: var(--pkr-fold-bg);
+  color: var(--pkr-soft);
 }
 
-.hand-cell.raise {
-  background: #dc3545;
-  color: white;
-}
-
-.hand-cell.raise-value {
-  background: #c82333;
-  color: white;
-}
-
-.hand-cell.raise-bluff {
-  background: #0069d9;
-  color: white;
-}
-
+.hand-cell.raise,
+.hand-cell.raise-value,
 .hand-cell.threebet-value {
-  background: #c82333;
-  color: white;
+  background: var(--pkr-raise);
+  color: var(--pkr-on-color);
 }
 
+.hand-cell.raise-bluff,
 .hand-cell.threebet-bluff {
-  background: #0069d9;
-  color: white;
+  background: var(--pkr-bluff);
+  color: var(--pkr-on-color);
 }
 
 .hand-cell.limp {
-  background: #28a745;
-  color: white;
+  background: var(--pkr-limp);
+  color: var(--pkr-on-color);
 }
 
 .hand-cell.call {
-  background: #20c997;
-  color: white;
+  background: var(--pkr-call);
+  color: var(--pkr-on-color);
 }
 
-/* Legend */
+/* ---------- Legend ---------- */
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.5rem 1.1rem;
   justify-content: center;
-  margin: 20px 0;
-  padding: 15px;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
+  padding: 0.55rem 0.75rem;
+  border-top: 1px solid var(--pkr-border);
+  border-bottom: 1px solid var(--pkr-border);
+  margin: 0 auto 0.85rem;
 }
 
 .legend-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  background: #f8f9fa;
+  gap: 0.4rem;
+  font-family: var(--pkr-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--pkr-soft);
+  text-transform: uppercase;
 }
 
 .legend-color {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  border: 2px solid rgba(0,0,0,0.1);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.legend-text {
-  font-size: 0.9em;
-  font-weight: 600;
-  color: #495057;
+html[data-theme="dark"] .legend-color {
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
+.legend-color--raise,
+.legend-color--threebet-value { background: var(--pkr-raise); }
+.legend-color--threebet-bluff { background: var(--pkr-bluff); }
+.legend-color--limp           { background: var(--pkr-limp); }
+.legend-color--call           { background: var(--pkr-call); }
+.legend-color--fold           { background: var(--pkr-fold-bg); }
 
-/* Mobile Optimizations */
-@media (max-width: 768px) {
-  .poker-strategy-tool {
-    padding: 10px;
-  }
-
-  .position-display {
-    min-width: 100px;
-    font-size: 1em;
-  }
-
-  .nav-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 1.3em;
-  }
-
-  .villain-btn {
-    padding: 8px 14px;
-    font-size: 0.9em;
-    min-width: 65px;
-  }
-
-  .hand-matrix {
-    font-size: 0.65em;
-    gap: 1px;
-    padding: 1px;
-  }
-
-  .legend {
-    gap: 8px;
-    padding: 12px;
-  }
-
-  .legend-item {
-    padding: 4px 8px;
-  }
-
-  .legend-color {
-    width: 24px;
-    height: 24px;
-  }
-
-  .legend-text {
-    font-size: 0.8em;
-  }
-}
-
-@media (max-width: 480px) {
-  .hand-matrix {
-    font-size: 0.55em;
-  }
-
-  .position-display {
-    min-width: 90px;
-    padding: 10px 16px;
-    font-size: 0.95em;
-  }
-
-  .nav-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .villain-btn {
-    padding: 7px 12px;
-    font-size: 0.85em;
-    min-width: 60px;
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .position-controls {
-    background: #2d3748;
-  }
-
-  .position-display {
-    background: #1a202c;
-    border-color: #4a5568;
-    color: #e2e8f0;
-  }
-
-  .nav-btn {
-    background: #2d3748;
-    border-color: #3182ce;
-    color: #3182ce;
-  }
-
-  .nav-btn:hover {
-    background: #3182ce;
-    color: white;
-  }
-
-  .villain-btn {
-    background: #1a202c;
-    border-color: #4a5568;
-    color: #e2e8f0;
-  }
-
-  .villain-btn.active {
-    background: #3182ce;
-    border-color: #3182ce;
-  }
-
-  .villain-btn.none {
-    background: #2d3748;
-    border-color: #4a5568;
-    color: #a0aec0;
-  }
-
-  .villain-btn.none.active {
-    background: #4a5568;
-    color: #e2e8f0;
-  }
-
-  .legend {
-    background: #2d3748;
-    border-color: #4a5568;
-  }
-
-  .legend-item {
-    background: #1a202c;
-  }
-
-  .legend-text {
-    color: #e2e8f0;
-  }
-
-  .control-label {
-    color: #e2e8f0;
-  }
-}
-
-/* Touch swipe hint */
+/* ---------- Swipe hint ---------- */
 .swipe-hint {
   text-align: center;
-  color: #6c757d;
-  font-size: 0.85em;
-  margin-top: 10px;
-  font-style: italic;
+  color: var(--pkr-soft);
+  font-family: var(--pkr-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
 }
 
 @media (min-width: 769px) {
-  .swipe-hint {
-    display: none;
+  .swipe-hint { display: none; }
+}
+
+/* ---------- Help ---------- */
+.pkr-help {
+  /* Matches .poker-strategy-tool width so the help block stays
+     visually aligned with the matrix above. */
+  max-width: clamp(280px, calc(100vh - 310px), 520px);
+  margin: 0.85rem auto 0;
+  padding: 0.7rem 0.95rem;
+  background: var(--pkr-surface);
+  border: 1px solid var(--pkr-border);
+  border-radius: 4px;
+}
+
+.pkr-help-title {
+  margin: 0 0 0.4rem;
+  font-family: var(--pkr-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pkr-soft);
+  font-weight: 600;
+}
+
+.pkr-help ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pkr-help li {
+  padding: 0.12rem 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--pkr-text);
+}
+
+.pkr-help li strong {
+  font-weight: 600;
+  margin-right: 0.35rem;
+  color: var(--pkr-text);
+}
+
+.pkr-help small {
+  display: block;
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--pkr-border);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--pkr-soft);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .pkr-controls {
+    padding: 1rem 1rem;
+    gap: 0.9rem;
   }
+
+  .pkr-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .pkr-label {
+    text-align: center;
+  }
+
+  .pkr-hero-position { font-size: 1.2rem; }
+
+  .pkr-villain-btn {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.55rem;
+    min-width: 48px;
+  }
+
+  .legend {
+    gap: 0.55rem 1rem;
+    padding: 0.7rem 0.6rem;
+  }
+
+  .legend-item { font-size: 0.68rem; }
+
+  .pkr-help { padding: 1rem 1.1rem; }
+  .pkr-help li { font-size: 0.85rem; }
 }
 </style>
 
 <div class="poker-strategy-tool">
-  <p style="text-align: center; color: #6c757d; margin-bottom: 25px;">
-    Navigate your position with arrows, then select a villain to see defense strategy (or "None" for RFI).
+  <p class="pkr-intro">
+    Step through your position, then pick a villain to see the defense range. Pick <em>None</em> to see your RFI strategy from that seat.
   </p>
 
-  <!-- Position Controls -->
-  <div class="position-controls">
-    <!-- Hero Position -->
-    <div class="position-row">
-      <label class="control-label">Your Position:</label>
-      <div class="hero-nav">
-        <button class="nav-btn prev" id="hero-prev" aria-label="Previous position">◀</button>
-        <div class="position-display" id="hero-position">BB</div>
-        <button class="nav-btn next" id="hero-next" aria-label="Next position">▶</button>
+  <div class="pkr-controls">
+    <div class="pkr-row">
+      <span class="pkr-label">Hero</span>
+      <div class="pkr-hero">
+        <button class="pkr-nav-btn" id="hero-prev" aria-label="Previous position">◀</button>
+        <div class="pkr-hero-display">
+          <div class="pkr-hero-position" id="hero-position">UTG</div>
+          <span class="pkr-hero-meta" id="hero-meta">&nbsp;</span>
+        </div>
+        <button class="pkr-nav-btn" id="hero-next" aria-label="Next position">▶</button>
       </div>
-      <div class="swipe-hint">💡 Swipe left/right to navigate</div>
     </div>
 
-    <!-- Villain Selection -->
-    <div class="villain-row">
-      <label class="control-label">Villain:</label>
-      <div class="villain-buttons" id="villain-buttons">
-        <!-- Dynamically populated -->
-      </div>
+    <div class="pkr-row">
+      <span class="pkr-label">Villain</span>
+      <div class="pkr-villains" id="villain-buttons"></div>
     </div>
   </div>
 
-  <!-- Legend -->
-  <div class="legend" id="legend"></div>
+  <div class="swipe-hint">Swipe ← / → to change position</div>
 
-  <!-- Hand Matrix -->
   <div class="hand-matrix" id="hand-matrix"></div>
+
+  <div class="legend" id="legend"></div>
 </div>
 
 <script>
@@ -472,14 +442,14 @@ const hands = [
 const allPositions = ['BB', 'UTG', 'UTG+1', 'UTG+2', 'LJ', 'HJ', 'CO', 'BTN', 'SB'];
 
 // State
-let heroIndex = 0;
+let heroIndex = 1; // default to UTG
 let selectedVillain = null; // null = "None"
 
 // RFI Ranges
 const rfiRanges = {
   'UTG': {
     name: 'UTG - Raise First In',
-    stats: 'Raise: 10.1% | Fold: 89.9%',
+    stats: 'Raise: 9.2% | Fold: 90.8%',
     raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','AKs','AQs','AJs','ATs','A9s','A5s','AKo','KQs','KJs','KTs','QJs','QTs','JTs','T9s','98s']
   },
   'UTG+1': {
@@ -509,12 +479,12 @@ const rfiRanges = {
   },
   'BTN': {
     name: 'Button - Raise First In',
-    stats: 'Raise: 51.1% | Fold: 48.9%',
+    stats: 'Raise: 43.3% | Fold: 56.7%',
     raise: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s','KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','QJs','QTs','Q9s','Q8s','Q7s','Q6s','Q5s','Q4s','Q3s','Q2s','JTs','J9s','J8s','J7s','J6s','T9s','T8s','T7s','T6s','98s','97s','96s','87s','86s','76s','65s','54s','43s','32s','AKo','AQo','AJo','ATo','A9o','A8o','A7o','A6o','A5o','A4o','A3o','A2o','KQo','KJo','KTo','K9o','K8o','K7o','QJo','QTo','Q9o','JTo','J9o','T9o']
   },
   'SB': {
     name: 'Small Blind - RFI Strategy',
-    stats: 'Raise Value: 8.8% | Raise Bluff: 13.0% | Limp: 49.6% | Fold: 29.6%',
+    stats: 'Raise Value: 10.4% | Raise Bluff: 15.7% | Limp: 26.2% | Fold: 47.7%',
     raiseValue: ['AA','KK','QQ','JJ','TT','99','88','77','66','55','44','AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','AKo','AQo','AJo','KQs','KJs'],
     raiseBluff: ['A4s','A3s','A2s','ATo','A9o','A8o','A7o','A6o','A5o','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s','KQo','KJo','KTo','K9o','QJs','QTs','Q9s','Q8s','QJo','QTo','JTs','J9s','J8s','JTo','T9s','T8s','T9o','98s','97s','87s','86s','76s','75s','65s','64s','54s','53s'],
     limp: ['33','22','Q7s','Q6s','Q5s','Q4s','Q3s','Q2s','Q9o','Q8o','Q7o','J7s','J6s','J5s','J4s','J3s','J2s','J9o','J8o','J7o','T7s','T6s','T5s','T4s','T3s','T2s','T8o','T7o','96s','95s','94s','93s','92s','98o','97o','85s','84s','83s','82s','87o','86o','74s','73s','72s','76o','75o','63s','62s','65o','52s','54o','43s','42s','32s']
@@ -653,7 +623,7 @@ const facingRFI = {
   'BTN_vs_UTG+2': {
     threebet_value: ['AA','AKs','AQs','AKo','KK','QQ','JJ','TT'],
     threebet_bluff: ['A5s','A4s','A3s','A2s','K9s','K8s','K7s','K6s','Q9s','Q8s','J9s','T9s','98s','87s'],
-    call: ['99','88','77','66','55','44','AJs','ATs','A9s','A8s','AQo','AJo','ATo','KQs','KJs','KTs','KQo','KJo','QJs','QTs','QJo','JTs','J9s']
+    call: ['99','88','77','66','55','44','AJs','ATs','A9s','A8s','AQo','AJo','ATo','KQs','KJs','KTs','KQo','KJo','QJs','QTs','QJo','JTs']
   },
   'BTN_vs_LJ': {
     threebet_value: ['AA','AKs','AQs','AKo','KK','QQ','JJ','TT'],
@@ -716,8 +686,8 @@ const facingRFI = {
   },
   'HJ_vs_LJ': {
     threebet_value: ['AA','AKs','AQs','AKo','KK','QQ','JJ','TT'],
-    threebet_bluff: ['A5s','A4s','A3s','A2s','K9s','K8s','K7s','Q9s','Q8s','J9s','T9s','T8s','98s','97s','87s','86s','76s','65s','66','55'],
-    call: ['99','88','77','AJs','ATs','AQo','AJo','KQs','KJs','KTs','QJs','QTs','JTs']
+    threebet_bluff: ['A5s','A4s','A3s','A2s','K9s','K8s','K7s','Q9s','Q8s','J9s','T9s','T8s','98s','97s','87s','86s','76s','65s'],
+    call: ['99','88','77','66','55','AJs','ATs','AQo','AJo','KQs','KJs','KTs','QJs','QTs','JTs']
   },
 
   // Lojack scenarios (Page 4)
@@ -753,22 +723,24 @@ const facingRFI = {
   'UTG+1_vs_UTG': {
     threebet_value: ['AA','AKs','AKo','KK','QQ'],
     threebet_bluff: ['A5s','A4s'],
-    call: ['JJ','TT','AQs','AJs','AKo','KQs','KJs','QJs','JTs']
+    call: ['JJ','TT','AQs','AJs','KQs','KJs','QJs','JTs']
   }
 };
 
-// Legend configurations
+// Legend configurations.
+// `cellClass` mirrors the matrix cell class so the swatch inherits the
+// same CSS variable — dark mode and palette changes stay in one place.
 const legendConfigs = {
   rfi: [
-    { color: '#dc3545', text: 'Raise' },
-    { color: '#28a745', text: 'Limp' },
-    { color: '#e9ecef', text: 'Fold', textColor: '#6c757d' }
+    { cellClass: 'raise', text: 'Raise' },
+    { cellClass: 'limp',  text: 'Limp' },
+    { cellClass: 'fold',  text: 'Fold' }
   ],
   facing: [
-    { color: '#c82333', text: '3-bet Value' },
-    { color: '#0069d9', text: '3-bet Bluff' },
-    { color: '#20c997', text: 'Call' },
-    { color: '#e9ecef', text: 'Fold', textColor: '#6c757d' }
+    { cellClass: 'threebet-value', text: '3-bet Value' },
+    { cellClass: 'threebet-bluff', text: '3-bet Bluff' },
+    { cellClass: 'call',           text: 'Call' },
+    { cellClass: 'fold',           text: 'Fold' }
   ]
 };
 
@@ -793,10 +765,10 @@ function updateLegend(isFacing) {
   const config = isFacing ? legendConfigs.facing : legendConfigs.rfi;
 
   legend.innerHTML = config.map(item => `
-    <div class="legend-item">
-      <div class="legend-color" style="background: ${item.color}"></div>
-      <span class="legend-text" style="${item.textColor ? 'color: ' + item.textColor : ''}">${item.text}</span>
-    </div>
+    <span class="legend-item">
+      <span class="legend-color legend-color--${item.cellClass}" aria-hidden="true"></span>
+      <span class="legend-text">${item.text}</span>
+    </span>
   `).join('');
 }
 
@@ -859,7 +831,7 @@ function updateVillainButtons() {
 
   // Always add "None" button
   const noneBtn = document.createElement('button');
-  noneBtn.className = 'villain-btn none' + (selectedVillain === null ? ' active' : '');
+  noneBtn.className = 'pkr-villain-btn none' + (selectedVillain === null ? ' active' : '');
   noneBtn.textContent = 'None';
   noneBtn.addEventListener('click', () => {
     selectedVillain = null;
@@ -874,7 +846,7 @@ function updateVillainButtons() {
   for (let i = 1; i < endIndex; i++) {
     const pos = allPositions[i];
     const btn = document.createElement('button');
-    btn.className = 'villain-btn' + (selectedVillain === pos ? ' active' : '');
+    btn.className = 'pkr-villain-btn' + (selectedVillain === pos ? ' active' : '');
     btn.textContent = pos;
     btn.dataset.position = pos;
     btn.addEventListener('click', () => {
@@ -885,12 +857,25 @@ function updateVillainButtons() {
   }
 }
 
+// Build a short context string shown under the hero position label
+function buildHeroMeta(hero, villain) {
+  if (villain) {
+    return `Defending vs ${villain}`;
+  }
+  const range = rfiRanges[hero];
+  if (!range) return '';
+  // Shorten verbose names like "Cutoff - Raise First In" → "Raise First In"
+  const segments = range.name.split(' - ');
+  return segments.length > 1 ? segments[1] : range.name;
+}
+
 // Update display
 function updateDisplay() {
   const heroPos = allPositions[heroIndex];
 
-  // Update position display
+  // Update position display + context line
   document.getElementById('hero-position').textContent = heroPos;
+  document.getElementById('hero-meta').textContent = buildHeroMeta(heroPos, selectedVillain);
 
   // Update villain buttons
   updateVillainButtons();
@@ -947,7 +932,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let touchStartX = 0;
   let touchEndX = 0;
 
-  const heroNav = document.querySelector('.hero-nav');
+  const heroNav = document.querySelector('.pkr-hero');
 
   heroNav.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
@@ -996,15 +981,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
-  <h3>How to Use</h3>
+<div class="pkr-help">
+  <h3 class="pkr-help-title">How to use</h3>
   <ul>
-    <li><strong>Navigate your position:</strong> Use ◀ ▶ arrows or swipe left/right on mobile</li>
-    <li><strong>RFI Mode:</strong> Click "None" for villain to see raise-first-in strategy</li>
-    <li><strong>Defense Mode:</strong> Click any villain button to see your 3-bet and calling ranges</li>
-    <li><strong>Keyboard:</strong> Use arrow keys to navigate position on desktop</li>
+    <li><strong>Position:</strong> step with the ◀ ▶ arrows, the arrow keys, or swipe on mobile.</li>
+    <li><strong>RFI:</strong> select <em>None</em> to see your raise-first-in range from the current seat.</li>
+    <li><strong>Defense:</strong> select any earlier position to see your 3-bet and calling range against their open.</li>
   </ul>
-  <p><small>
-    Based on professional preflop charts for 100BB stacks. These are default ranges - adjust based on opponents and game dynamics.
-  </small></p>
+  <small>Based on standard preflop charts for 100BB cash. Treat as a default — adjust to opponents, stack depth, and game dynamics.</small>
 </div>
