@@ -17,7 +17,6 @@ announcements:
   enabled: true # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
-
 ---
 
 Hi! It's Yifan. I'm currently a graduate student working towards my Master of Science (M.S.) degree in Information Management at University of Illinois at Urbana-Champaign. My research interests include `Vision Language Model, LLM agents, Prompt optimization and 3D Reconstrcution`.

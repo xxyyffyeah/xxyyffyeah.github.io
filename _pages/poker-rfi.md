@@ -411,6 +411,7 @@ html[data-theme="dark"] .legend-color {
       <span class="pkr-label">Villain</span>
       <div class="pkr-villains" id="villain-buttons"></div>
     </div>
+
   </div>
 
   <div class="swipe-hint">Swipe ← / → to change position</div>
