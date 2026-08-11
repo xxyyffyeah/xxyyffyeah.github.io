@@ -19,7 +19,7 @@ announcements:
   limit: 5 # leave blank to include all the news in the `_news` folder
 ---
 
-Hi! It's Yifan. I'm currently a Ph.D. student in Computer Science and Engineering at the University of Notre Dame, advised by [Prof. Danny Z. Chen](https://engineering.nd.edu/faculty/danny-chen/). My research interests include `Vision Language Model, LLM agents, Prompt optimization and 3D Reconstruction`.
+Hi! It's Yifan. I'm currently a Ph.D. student in Computer Science and Engineering at the University of Notre Dame, advised by [Prof. Danny Z. Chen](https://engineering.nd.edu/faculty/danny-chen/). My research focuses on `Biomedical Imaging`.
 
 Before joining Notre Dame, I received my Master of Science (M.S.) degree in Information Management at the University of Illinois Urbana-Champaign, where I worked on `Cognitive VLM` and `Large Language Model Agents` under the guidance of [Prof. James M. Rehg](https://rehg.org/) and [Prof. Haohan Wang](https://haohanwang.github.io/). My research journey began during my undergraduate studies at ShanghaiTech University, where I earned a B.Eng. in Computer Science. There, I had the opportunity to work on `Microscopic 3D Reconstruction` in the AMNR Lab with [Prof. Song Liu](https://sist.shanghaitech.edu.cn/liusong_en/main.htm).
 
