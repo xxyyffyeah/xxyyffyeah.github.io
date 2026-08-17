@@ -58,6 +58,9 @@ ninja.data = [{
           section: "News",},{id: "news-joined-rehg-lab-under-supervision-of-prof-james-m-rehg",
           title: 'Joined Rehg Lab under supervision of Prof. James M. Rehg.',
           description: "",
+          section: "News",},{id: "news-joined-prof-danny-z-chen-s-lab-at-the-university-of-notre-dame-and-started-my-ph-d-journey",
+          title: 'Joined Prof. Danny Z. Chen’s lab at the University of Notre Dame and...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
